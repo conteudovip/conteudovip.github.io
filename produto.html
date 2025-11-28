@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produto · Telegram Secrets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script>
+      window.__API_BASE_URL__ = window.__API_BASE_URL__ || "http://localhost:8080";
+    </script>
+  </head>
+  <body class="product-page">
+    <header class="sub-header">
+      <a class="sub-header__back" href="index.html#produtos">← Voltar para os produtos</a>
+      <div class="logo">
+        <div class="logo__badge">TS</div>
+        <div class="logo__text">
+          <span>Telegram Secrets</span>
+          <small>VIPs</small>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Loading State -->
+      <div id="loading" class="product-loading">
+        <span></span>
+        <p>Carregando produto...</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="error" class="product-error" hidden>
+        <p>❌ Produto não encontrado</p>
+        <a href="index.html#produtos" class="primary-cta">Voltar para produtos</a>
+      </div>
+
+      <!-- Product Content -->
+      <div id="product-content" hidden>
+        <section class="product-hero">
+          <span class="product-hero__tag" data-category>Premium</span>
+          <h1 data-title>Carregando...</h1>
+          <p class="product-hero__lead" data-description>Carregando descrição...</p>
+          <div class="product-hero__meta">
+            <span data-price>R$ 0,00</span>
+            <span data-lifetime>Carregando...</span>
+          </div>
+        </section>
+
+        <section class="product-details">
+          <article>
+            <h2>Detalhes do Produto</h2>
+            <div data-media-container></div>
+            <p data-full-description></p>
+            
+            <div data-benefits-container hidden>
+              <h3>Benefícios incluídos:</h3>
+              <ul class="feature-list" data-benefits></ul>
+            </div>
+          </article>
+        </section>
+
+        <!-- PIX Section -->
+        <section class="product-pix" id="pix-section">
+          <div class="product-pix__header">
+            <h2>💳 Pagamento via Pix</h2>
+            <p class="badge badge--hot">Pagamento seguro e anônimo</p>
+          </div>
+
+          <!-- Loading PIX -->
+          <div id="pix-loading" class="product-pix__loading" hidden>
+            <span></span>
+            <p>Gerando código Pix...</p>
+          </div>
+
+          <!-- Generate PIX Button -->
+          <div id="pix-generate" class="product-pix__generate">
+            <button class="primary-cta" id="btn-generate-pix" type="button">
+              Gerar Código Pix
+            </button>
+            <p class="product-pix__note" data-note></p>
+          </div>
+
+          <!-- PIX Content (shown after generation) -->
+          <div id="pix-content" class="product-pix__content" hidden>
+            <div class="product-pix__price">
+              <strong id="pix-price"></strong>
+              <small id="pix-lifetime"></small>
+            </div>
+
+            <label for="pix-code">Código Pix (copia e cola)</label>
+            <textarea id="pix-code" readonly></textarea>
+
+            <div class="product-pix__actions">
+              <button type="button" class="primary-cta" id="btn-copy-pix">Copiar código</button>
+              <button type="button" class="secondary-cta" id="btn-regenerate-pix">Gerar novamente</button>
+            </div>
+
+            <div class="product-pix__qr">
+              <img id="pix-qr" alt="QR Code Pix" />
+            </div>
+
+            <div class="product-pix__status" id="pix-status">
+              Aguardando pagamento Pix...
+            </div>
+
+            <div class="product-pix__secret" id="pix-secret" hidden>
+              <p>✅ Pagamento confirmado! Acesso liberado:</p>
+              <a id="secret-link" target="_blank" rel="noopener noreferrer" class="primary-cta">
+                Abrir conteúdo premium
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="./assets/products.js"></script>
+    <script>
+      const API_BASE_URL = window.__API_BASE_URL__ || "http://localhost:8080";
+      
+      // Get product ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get("id");
+
+      const state = {
+        product: null,
+        paymentId: null,
+        pollTimer: null,
+      };
+
+      // DOM Elements
+      const loadingEl = document.getElementById("loading");
+      const errorEl = document.getElementById("error");
+      const contentEl = document.getElementById("product-content");
+      const pixLoading = document.getElementById("pix-loading");
+      const pixGenerate = document.getElementById("pix-generate");
+      const pixContent = document.getElementById("pix-content");
+      const btnGeneratePix = document.getElementById("btn-generate-pix");
+      const btnCopyPix = document.getElementById("btn-copy-pix");
+      const btnRegeneratePix = document.getElementById("btn-regenerate-pix");
+      const pixCodeField = document.getElementById("pix-code");
+      const pixQr = document.getElementById("pix-qr");
+      const pixStatus = document.getElementById("pix-status");
+      const pixSecret = document.getElementById("pix-secret");
+      const secretLink = document.getElementById("secret-link");
+
+      // Load product
+      async function loadProduct() {
+        if (!productId) {
+          showError();
+          return;
+        }
+
+        try {
+          const response = await fetch(`${API_BASE_URL}/products`);
+          if (!response.ok) throw new Error("API não respondeu");
+          
+          const products = await response.json();
+          const product = products.find(p => p.product_id === productId);
+          
+          if (!product) {
+            showError();
+            return;
+          }
+
+          state.product = product;
+          renderProduct(product);
+        } catch (error) {
+          console.error("Erro ao carregar produto:", error);
+          showError();
+        }
+      }
+
+      function showError() {
+        loadingEl.hidden = true;
+        errorEl.hidden = false;
+        contentEl.hidden = true;
+      }
+
+      function renderProduct(product) {
+        // Set page title
+        document.title = `${product.title} · Telegram Secrets`;
+
+        // Hero section
+        document.querySelector("[data-category]").textContent = product.category || "Premium";
+        document.querySelector("[data-title]").textContent = product.title;
+        document.querySelector("[data-description]").textContent = product.description;
+        document.querySelector("[data-price]").textContent = new Intl.NumberFormat("pt-BR", {
+          style: "currency",
+          currency: product.currency || "BRL",
+        }).format(product.price);
+        document.querySelector("[data-lifetime]").textContent = product.lifetime_text || "Acesso vitalício incluído";
+
+        // Full description
+        const fullDesc = document.querySelector("[data-full-description]");
+        fullDesc.textContent = product.description;
+
+        // Media
+        const mediaContainer = document.querySelector("[data-media-container]");
+        if (product.media_type === "video" && product.media_src) {
+          const video = document.createElement("video");
+          video.src = product.media_src;
+          video.poster = product.media_poster || "";
+          video.controls = true;
+          video.className = "product-media";
+          mediaContainer.appendChild(video);
+        } else if (product.media_src) {
+          const img = document.createElement("img");
+          img.src = product.media_src;
+          img.alt = product.title;
+          img.className = "product-media";
+          mediaContainer.appendChild(img);
+        }
+
+        // Benefits
+        if (product.benefits && product.benefits.length > 0) {
+          const benefitsContainer = document.querySelector("[data-benefits-container]");
+          const benefitsList = document.querySelector("[data-benefits]");
+          benefitsList.innerHTML = "";
+          product.benefits.forEach(benefit => {
+            const li = document.createElement("li");
+            li.textContent = benefit;
+            benefitsList.appendChild(li);
+          });
+          benefitsContainer.hidden = false;
+        }
+
+        // Note
+        const noteEl = document.querySelector("[data-note]");
+        if (noteEl) {
+          noteEl.textContent = product.note || "Liberação imediata";
+        }
+
+        // Show content
+        loadingEl.hidden = true;
+        errorEl.hidden = true;
+        contentEl.hidden = false;
+      }
+
+      // Generate PIX
+      async function generatePix() {
+        if (!state.product) return;
+
+        pixLoading.hidden = false;
+        pixGenerate.hidden = true;
+        pixContent.hidden = true;
+        pixStatus.textContent = "Gerando código Pix seguro...";
+
+        try {
+          const response = await fetch(`${API_BASE_URL}/checkout`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              product_id: state.product.product_id,
+              customer_ref: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error(await response.text());
+          }
+
+          const data = await response.json();
+          state.paymentId = data.payment_id;
+
+          // Populate PIX data
+          pixCodeField.value = data.pix_code;
+          if (data.qr_base64) {
+            pixQr.src = `data:image/png;base64,${data.qr_base64}`;
+          }
+          document.getElementById("pix-price").textContent = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: state.product.currency || "BRL",
+          }).format(state.product.price);
+          document.getElementById("pix-lifetime").textContent = state.product.lifetime_text || "Acesso vitalício incluído";
+
+          pixLoading.hidden = true;
+          pixContent.hidden = false;
+          pixStatus.textContent = "Aguardando pagamento Pix...";
+
+          // Start polling
+          startPolling();
+        } catch (error) {
+          console.error("Erro ao gerar Pix:", error);
+          pixLoading.hidden = true;
+          pixGenerate.hidden = false;
+          pixStatus.textContent = "Erro ao gerar Pix. Tente novamente.";
+        }
+      }
+
+      // Poll payment status
+      function pollPayment() {
+        if (!state.paymentId) return;
+
+        fetch(`${API_BASE_URL}/payments/${state.paymentId}`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.status === "paid") {
+              pixStatus.textContent = "✅ Pagamento confirmado! Acesso liberado!";
+              if (data.secret_link) {
+                secretLink.href = data.secret_link;
+                secretLink.textContent = "Abrir conteúdo premium";
+                pixSecret.hidden = false;
+              }
+              if (state.pollTimer) {
+                clearInterval(state.pollTimer);
+                state.pollTimer = null;
+              }
+            }
+          })
+          .catch(() => {});
+      }
+
+      function startPolling() {
+        if (state.pollTimer) clearInterval(state.pollTimer);
+        state.pollTimer = setInterval(pollPayment, 4000);
+      }
+
+      // Event listeners
+      btnGeneratePix?.addEventListener("click", generatePix);
+      btnRegeneratePix?.addEventListener("click", generatePix);
+      btnCopyPix?.addEventListener("click", async () => {
+        if (!pixCodeField.value) return;
+        try {
+          await navigator.clipboard.writeText(pixCodeField.value);
+          pixStatus.textContent = "Código copiado! Finalize o pagamento no app do banco.";
+        } catch (error) {
+          pixCodeField.select();
+          pixStatus.textContent = "Copie manualmente usando CTRL+C";
+        }
+      });
+
+      // Initialize
+      loadProduct();
+    </script>
+  </body>
+</html>
+

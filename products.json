@@ -1,0 +1,84 @@
+[
+  {
+    "product_id": "vip-pro",
+    "title": "Telegram Vips Pro",
+    "price": 497.0,
+    "currency": "BRL",
+    "description": "Todos os 37 canais secretos, traduÃÂ§ÃÂµes simultÃÂ¢neas e concierge dedicado.",
+    "media_type": "image",
+    "media_src": "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&w=900&q=80",
+    "media_poster": null,
+    "benefits": [
+      "37 canais ativos",
+      "Concierge 24/7",
+      "Alertas prioritÃÂ¡rios"
+    ],
+    "note": "LiberaÃÂ§ÃÂ£o imediata",
+    "lifetime_text": "VitalÃÂ­cio para 1 titular",
+    "category": "Acesso total"
+  },
+  {
+    "product_id": "signal-boost",
+    "title": "Signal Boost",
+    "price": 297.0,
+    "currency": "BRL",
+    "description": "Sinais condensados com API e briefing multimÃÂ­dia.",
+    "media_type": "image",
+    "media_src": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80",
+    "media_poster": null,
+    "benefits": [
+      "API pronta",
+      "AtÃÂ© 10 canais",
+      "Push instantÃÂ¢neo"
+    ],
+    "note": "Entrega 24/7",
+    "lifetime_text": "AtualizaÃÂ§ÃÂµes vitalÃÂ­cias",
+    "category": "OperaÃÂ§ÃÂ£o rÃÂ¡pida"
+  },
+  {
+    "product_id": "consultoria",
+    "title": "Consultoria 1:1",
+    "price": 1997.0,
+    "currency": "BRL",
+    "description": "Plano estratÃÂ©gico completo com NDA e relatÃÂ³rios proprietÃÂ¡rios.",
+    "media_type": "video",
+    "media_src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    "media_poster": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=80",
+    "benefits": [
+      "Framework proprietÃÂ¡rio",
+      "Suporte pÃÂ³s-sessÃÂ£o",
+      "Agenda prioritÃÂ¡ria"
+    ],
+    "note": "Slots limitados",
+    "lifetime_text": "RelatÃÂ³rios vitalÃÂ­cios",
+    "category": "Mentoria fechada"
+  },
+  {
+    "product_id": "produto",
+    "title": "Produto",
+    "price": 19.99,
+    "currency": "BRL",
+    "description": "descricao",
+    "media_type": "image",
+    "media_src": "https://api.telegram.org/file/bot8209184510:AAHOw4y0JAQNS5_v86e9CmzO872okkoO9eg/photos/file_0.jpg",
+    "media_poster": null,
+    "benefits": [],
+    "note": "LiberaÃÂ§ÃÂ£o imediata",
+    "lifetime_text": "Acesso vitalÃÂ­cio incluÃÂ­do",
+    "category": "Premium"
+  },
+  {
+    "product_id": "dsasdad",
+    "title": "dsasdad",
+    "price": 19.99,
+    "currency": "BRL",
+    "description": "dasdasd",
+    "media_type": "image",
+    "media_src": "https://api.telegram.org/file/bot8209184510:AAHOw4y0JAQNS5_v86e9CmzO872okkoO9eg/photos/file_0.jpg",
+    "media_poster": null,
+    "benefits": [],
+    "note": "LiberaÃÂ§ÃÂ£o imediata",
+    "lifetime_text": "Acesso vitalÃÂ­cio incluÃÂ­do",
+    "category": "Premium"
+  }
+]

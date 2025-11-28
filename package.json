@@ -1,0 +1,9 @@
+{
+  "name": "telegram-secrets-frontend",
+  "version": "1.0.0",
+  "description": "Frontend para Telegram Secrets",
+  "scripts": {
+    "build": "echo 'No build step needed'"
+  }
+}
+

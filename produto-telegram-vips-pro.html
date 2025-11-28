@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telegram Vips Pro · Telegram Secrets</title>
+    <meta
+      name="description"
+      content="Acesso completo aos canais secretos do Telegram Secrets, com alerts prioritários, concierge e traduções multilíngues."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="product-page">
+    <header class="sub-header">
+      <a class="sub-header__back" href="index.html#produtos">Voltar para os produtos</a>
+      <div class="logo">
+        <div class="logo__badge">TS</div>
+        <div class="logo__text">
+          <span>Telegram Secrets</span>
+          <small>VIPs</small>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="product-hero">
+        <span class="product-hero__tag">Acesso ilimitado</span>
+        <h1>Telegram Vips Pro</h1>
+        <p class="product-hero__lead">
+          Todos os nossos 37 canais secretos, com alertas em tempo real, traduções
+          simultâneas e suporte por concierge para liberar qualquer dúvida em
+          segundos.
+        </p>
+        <div class="product-hero__meta">
+          <span>💸 R$ 197 / mês</span>
+          <span>⚡ Liberação automática</span>
+          <span>🌎 12 idiomas</span>
+        </div>
+      </section>
+
+      <section class="product-details">
+        <article>
+          <h2>O que você recebe</h2>
+          <ul class="feature-list">
+            <li>37 canais VIPs com notificações ilimitadas por dia.</li>
+            <li>Alertas marcados como prioridade dentro do app.</li>
+            <li>Resumo multimídia (texto, áudio, pdf e prints).</li>
+            <li>Concierge 24/7 direto no Telegram ou e-mail.</li>
+          </ul>
+        </article>
+        <article class="faq">
+          <h3>Perguntas rápidas</h3>
+          <p>
+            <strong>Como recebo o link?</strong><br />
+            Assim que o Pix cai, o botão "Já paguei" libera o link secreto com
+            convite instantâneo.
+          </p>
+          <p>
+            <strong>Posso trocar o idioma?</strong><br />
+            Sim, há tradução simultânea para 12 idiomas, além dos originais.
+          </p>
+          <p>
+            <strong>E se eu precisar de nota?</strong><br />
+            Após a confirmação, você recebe invoice automática no e-mail cadastrado.
+          </p>
+        </article>
+      </section>
+
+      <section
+        class="pix-flow"
+        id="pix"
+        data-pix-flow
+        data-product="Telegram Vips Pro"
+        data-amount="197.00"
+        data-secret-url="https://t.me/+vipproaccess"
+      >
+        <div class="pix-card">
+          <h3>Pagamento via Pix</h3>
+          <p>
+            Gera um Pix copia e cola exclusivo, paga no aplicativo do seu banco e
+            confirma abaixo. A verificação leva poucos segundos.
+          </p>
+          <textarea
+            class="pix-code"
+            data-pix-code
+            readonly
+            placeholder="Clique em &quot;Gerar Pix&quot; para criar o código copia e cola."
+          ></textarea>
+          <div class="pix-actions">
+            <button class="primary-cta" type="button" data-generate>Gerar Pix</button>
+            <button class="secondary-cta" type="button" data-copy>Copiar código</button>
+          </div>
+          <button class="ghost-cta" type="button" data-confirm>Já paguei</button>
+          <p class="pix-feedback" data-pix-result></p>
+          <div class="secret-link" data-secret-wrap hidden>
+            <strong>Acesso liberado</strong>
+            <p>Este é o link oficial, válido somente para o titular do pagamento.</p>
+            <a
+              data-secret-link
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Abrir conteúdo VIP</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./assets/pix.js"></script>
+  </body>
+</html>
+
