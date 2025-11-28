@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste da API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .success { background: #2d5016; }
+        .error { background: #5a1a1a; }
+        .info { background: #1a3a5a; }
+        pre {
+            background: #000;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        button {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        button:hover {
+            background: #ff6666;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste da API</h1>
+    <div id="status"></div>
+    <button onclick="testar()">🔍 Testar API Agora</button>
+    <div id="result"></div>
+
+    <script>
+        const API_BASE_URL = window.__API_BASE_URL__ || "http://localhost:8080";
+
+        function mostrarStatus(msg, tipo) {
+            const status = document.getElementById("status");
+            status.className = `status ${tipo}`;
+            status.textContent = msg;
+        }
+
+        function mostrarResultado(data) {
+            const result = document.getElementById("result");
+            result.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        }
+
+        async function testar() {
+            mostrarStatus("🔄 Testando conexão...", "info");
+            mostrarResultado(null);
+
+            try {
+                // Teste 1: Health check
+                mostrarStatus("1️⃣ Testando /health...", "info");
+                const healthResponse = await fetch(`${API_BASE_URL}/health`);
+                const healthData = await healthResponse.json();
+                console.log("Health:", healthData);
+
+                // Teste 2: Products
+                mostrarStatus("2️⃣ Buscando produtos...", "info");
+                const productsResponse = await fetch(`${API_BASE_URL}/products`);
+                
+                if (!productsResponse.ok) {
+                    throw new Error(`Erro HTTP ${productsResponse.status}: ${productsResponse.statusText}`);
+                }
+
+                const productsData = await productsResponse.json();
+                console.log("Produtos:", productsData);
+
+                if (!Array.isArray(productsData)) {
+                    throw new Error("Resposta não é um array");
+                }
+
+                if (productsData.length === 0) {
+                    mostrarStatus("⚠️ API funcionando, mas nenhum produto encontrado!", "error");
+                    mostrarResultado({
+                        status: "OK",
+                        produtos_encontrados: 0,
+                        mensagem: "Use /addproduct no Telegram para adicionar produtos"
+                    });
+                } else {
+                    mostrarStatus(`✅ Sucesso! ${productsData.length} produto(s) encontrado(s)!`, "success");
+                    mostrarResultado({
+                        status: "OK",
+                        produtos_encontrados: productsData.length,
+                        produtos: productsData
+                    });
+                }
+
+            } catch (error) {
+                console.error("Erro:", error);
+                mostrarStatus(`❌ Erro: ${error.message}`, "error");
+                mostrarResultado({
+                    erro: error.message,
+                    url_testada: `${API_BASE_URL}/products`,
+                    solucao: "Verifique se o bot está rodando: python bot.py"
+                });
+            }
+        }
+
+        // Testa automaticamente ao carregar
+        window.addEventListener("load", () => {
+            mostrarStatus("📋 Clique no botão acima para testar a API", "info");
+        });
+    </script>
+</body>
+</html>
+
