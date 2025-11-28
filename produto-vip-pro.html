@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Telegram Vips Pro · Telegram Secrets</title>
-    <meta name="description" content="Todos os 37 canais secretos, traduções simultâneas e concierge dedicado." />
+    <meta name="description" content="Todos os 37 canais secretos, traduÃ§Ãµes simultÃ¢neas e concierge dedicado." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,7 +13,8 @@
     />
     <link rel="stylesheet" href="./styles.css" />
     <script>
-      window.__API_BASE_URL__ = window.__API_BASE_URL__ || "http://localhost:8080";
+      // Comunicação totalmente via bot - sem API
+      const TELEGRAM_BOT_USERNAME = "";
     </script>
   </head>
   <body class="product-page">
@@ -32,10 +33,10 @@
       <section class="product-hero">
         <span class="product-hero__tag">Acesso total</span>
         <h1>Telegram Vips Pro</h1>
-        <p class="product-hero__lead">Todos os 37 canais secretos, traduções simultâneas e concierge dedicado.</p>
+        <p class="product-hero__lead">Todos os 37 canais secretos, traduÃ§Ãµes simultÃ¢neas e concierge dedicado.</p>
         <div class="product-hero__meta">
           <span>R$ 497,00</span>
-          <span>Vitalício para 1 titular</span>
+          <span>VitalÃ­cio para 1 titular</span>
         </div>
       </section>
 
@@ -43,12 +44,12 @@
         <article>
           <h2>Detalhes do Produto</h2>
           <img class="product-media" src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&w=900&q=80" alt="Telegram Vips Pro" />
-          <p>Todos os 37 canais secretos, traduções simultâneas e concierge dedicado.</p>
+          <p>Todos os 37 canais secretos, traduÃ§Ãµes simultÃ¢neas e concierge dedicado.</p>
           
           <div>
             <h3>Benefícios incluídos:</h3>
             <ul class="feature-list">
-              <li>37 canais ativos</li><li>Concierge 24/7</li><li>Alertas prioritários</li>
+              <li>37 canais ativos</li><li>Concierge 24/7</li><li>Alertas prioritÃ¡rios</li>
             </ul>
           </div>
         
@@ -65,7 +66,7 @@
           <button class="primary-cta" id="btn-generate-pix" type="button">
             Gerar Código Pix
           </button>
-          <p class="product-pix__note">Liberação imediata</p>
+          <p class="product-pix__note">LiberaÃ§Ã£o imediata</p>
         </div>
 
         <div id="pix-loading" class="product-pix__loading" hidden>
@@ -112,7 +113,7 @@
     <script>
       const API_BASE_URL = window.__API_BASE_URL__ || "http://localhost:8080";
       const PRODUCT_ID = "vip-pro";
-      const PRODUCT_DATA = {"product_id": "vip-pro", "title": "Telegram Vips Pro", "price": 497.0, "currency": "BRL", "description": "Todos os 37 canais secretos, traduções simultâneas e concierge dedicado.", "secret_link": "https://t.me/+vipproaccess", "lifetime_text": "Vitalício para 1 titular", "note": "Liberação imediata"};
+      const PRODUCT_DATA = {"product_id": "vip-pro", "title": "Telegram Vips Pro", "price": 497.0, "currency": "BRL", "description": "Todos os 37 canais secretos, traduÃ§Ãµes simultÃ¢neas e concierge dedicado.", "secret_link": "https://t.me/+vipproaccess", "lifetime_text": "VitalÃ­cio para 1 titular", "note": "LiberaÃ§Ã£o imediata"};
 
       const state = {
         product: PRODUCT_DATA,

@@ -23,6 +23,11 @@
   box-sizing: border-box;
 }
 
+/* Garante que elementos com [hidden] fiquem escondidos */
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -1105,6 +1110,29 @@ select {
   color: var(--muted);
   font-size: 0.95rem;
   font-style: italic;
+}
+
+.product-pix__instructions {
+  border: 1px solid var(--stroke);
+  border-radius: 24px;
+  padding: 1.75rem;
+  background: var(--surface);
+  margin-top: 1rem;
+}
+
+.product-pix__instructions ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.product-pix__instructions li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.product-pix__instructions a {
+  display: inline-block;
+  margin-top: 1rem;
 }
 
 .product-pix__secret {

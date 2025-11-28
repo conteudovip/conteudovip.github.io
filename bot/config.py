@@ -35,6 +35,7 @@ def _csv_to_list(value: str | None) -> List[int]:
 class Settings:
   telegram_token: str
   telegram_admin_ids: List[int]
+  telegram_bot_username: str
   syncpay_auth_url: str
   syncpay_cashin_url: str
   syncpay_transaction_url: str
@@ -56,6 +57,7 @@ def load_settings() -> Settings:
   return Settings(
       telegram_token=os.getenv("TELEGRAM_BOT_TOKEN", ""),
       telegram_admin_ids=_csv_to_list(os.getenv("TELEGRAM_ADMIN_IDS", "")),
+      telegram_bot_username=os.getenv("TELEGRAM_BOT_USERNAME", ""),
       syncpay_auth_url=os.getenv("SYNCPAY_AUTH_URL", "https://syncpay.apidog.io/api/partner/v1/auth-token"),
       syncpay_cashin_url=os.getenv("SYNCPAY_CASHIN_URL", "https://syncpay.apidog.io/api/partner/v1/pix/cashin"),
       syncpay_transaction_url=os.getenv("SYNCPAY_TRANSACTION_URL", "https://syncpay.apidog.io/api/partner/v1/transactions"),

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signal Boost · Telegram Secrets</title>
-    <meta name="description" content="Sinais condensados com API e briefing multimídia." />
+    <meta name="description" content="Sinais condensados com API e briefing multimÃ­dia." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,7 +13,8 @@
     />
     <link rel="stylesheet" href="./styles.css" />
     <script>
-      window.__API_BASE_URL__ = window.__API_BASE_URL__ || "http://localhost:8080";
+      // Comunicação totalmente via bot - sem API
+      const TELEGRAM_BOT_USERNAME = "";
     </script>
   </head>
   <body class="product-page">
@@ -30,12 +31,12 @@
 
     <main>
       <section class="product-hero">
-        <span class="product-hero__tag">Operação rápida</span>
+        <span class="product-hero__tag">OperaÃ§Ã£o rÃ¡pida</span>
         <h1>Signal Boost</h1>
-        <p class="product-hero__lead">Sinais condensados com API e briefing multimídia.</p>
+        <p class="product-hero__lead">Sinais condensados com API e briefing multimÃ­dia.</p>
         <div class="product-hero__meta">
           <span>R$ 297,00</span>
-          <span>Atualizações vitalícias</span>
+          <span>AtualizaÃ§Ãµes vitalÃ­cias</span>
         </div>
       </section>
 
@@ -43,12 +44,12 @@
         <article>
           <h2>Detalhes do Produto</h2>
           <img class="product-media" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Signal Boost" />
-          <p>Sinais condensados com API e briefing multimídia.</p>
+          <p>Sinais condensados com API e briefing multimÃ­dia.</p>
           
           <div>
             <h3>Benefícios incluídos:</h3>
             <ul class="feature-list">
-              <li>API pronta</li><li>Até 10 canais</li><li>Push instantâneo</li>
+              <li>API pronta</li><li>AtÃ© 10 canais</li><li>Push instantÃ¢neo</li>
             </ul>
           </div>
         
@@ -112,7 +113,7 @@
     <script>
       const API_BASE_URL = window.__API_BASE_URL__ || "http://localhost:8080";
       const PRODUCT_ID = "signal-boost";
-      const PRODUCT_DATA = {"product_id": "signal-boost", "title": "Signal Boost", "price": 297.0, "currency": "BRL", "description": "Sinais condensados com API e briefing multimídia.", "secret_link": "https://t.me/+signalboostvip", "lifetime_text": "Atualizações vitalícias", "note": "Entrega 24/7"};
+      const PRODUCT_DATA = {"product_id": "signal-boost", "title": "Signal Boost", "price": 297.0, "currency": "BRL", "description": "Sinais condensados com API e briefing multimÃ­dia.", "secret_link": "https://t.me/+signalboostvip", "lifetime_text": "AtualizaÃ§Ãµes vitalÃ­cias", "note": "Entrega 24/7"};
 
       const state = {
         product: PRODUCT_DATA,

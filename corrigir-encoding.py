@@ -4,7 +4,23 @@ import json
 from pathlib import Path
 
 def main():
-    products_file = Path("bot/data/products.json")
+    # Tenta diferentes caminhos possíveis
+    possible_paths = [
+        Path("bot/data/products.json"),
+        Path("bot/products.json"),
+    ]
+    
+    products_file = None
+    for path in possible_paths:
+        if path.exists():
+            products_file = path
+            break
+    
+    if not products_file:
+        print("Erro: products.json não encontrado em nenhum dos caminhos:")
+        for p in possible_paths:
+            print(f"  - {p}")
+        return
     
     # Tenta ler com diferentes encodings
     content = None

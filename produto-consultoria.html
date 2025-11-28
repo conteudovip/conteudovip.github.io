@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Consultoria 1:1 · Telegram Secrets</title>
-    <meta name="description" content="Plano estratégico completo com NDA e relatórios proprietários." />
+    <meta name="description" content="Plano estratÃ©gico completo com NDA e relatÃ³rios proprietÃ¡rios." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,7 +13,8 @@
     />
     <link rel="stylesheet" href="./styles.css" />
     <script>
-      window.__API_BASE_URL__ = window.__API_BASE_URL__ || "http://localhost:8080";
+      // Comunicação totalmente via bot - sem API
+      const TELEGRAM_BOT_USERNAME = "";
     </script>
   </head>
   <body class="product-page">
@@ -32,10 +33,10 @@
       <section class="product-hero">
         <span class="product-hero__tag">Mentoria fechada</span>
         <h1>Consultoria 1:1</h1>
-        <p class="product-hero__lead">Plano estratégico completo com NDA e relatórios proprietários.</p>
+        <p class="product-hero__lead">Plano estratÃ©gico completo com NDA e relatÃ³rios proprietÃ¡rios.</p>
         <div class="product-hero__meta">
           <span>R$ 1.997,00</span>
-          <span>Relatórios vitalícios</span>
+          <span>RelatÃ³rios vitalÃ­cios</span>
         </div>
       </section>
 
@@ -43,12 +44,12 @@
         <article>
           <h2>Detalhes do Produto</h2>
           <video class="product-media" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" poster="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=80" controls></video>
-          <p>Plano estratégico completo com NDA e relatórios proprietários.</p>
+          <p>Plano estratÃ©gico completo com NDA e relatÃ³rios proprietÃ¡rios.</p>
           
           <div>
             <h3>Benefícios incluídos:</h3>
             <ul class="feature-list">
-              <li>Framework proprietário</li><li>Suporte pós-sessão</li><li>Agenda prioritária</li>
+              <li>Framework proprietÃ¡rio</li><li>Suporte pÃ³s-sessÃ£o</li><li>Agenda prioritÃ¡ria</li>
             </ul>
           </div>
         
@@ -112,7 +113,7 @@
     <script>
       const API_BASE_URL = window.__API_BASE_URL__ || "http://localhost:8080";
       const PRODUCT_ID = "consultoria";
-      const PRODUCT_DATA = {"product_id": "consultoria", "title": "Consultoria 1:1", "price": 1997.0, "currency": "BRL", "description": "Plano estratégico completo com NDA e relatórios proprietários.", "secret_link": "https://t.me/+consultoriaelite", "lifetime_text": "Relatórios vitalícios", "note": "Slots limitados"};
+      const PRODUCT_DATA = {"product_id": "consultoria", "title": "Consultoria 1:1", "price": 1997.0, "currency": "BRL", "description": "Plano estratÃ©gico completo com NDA e relatÃ³rios proprietÃ¡rios.", "secret_link": "https://t.me/+consultoriaelite", "lifetime_text": "RelatÃ³rios vitalÃ­cios", "note": "Slots limitados"};
 
       const state = {
         product: PRODUCT_DATA,

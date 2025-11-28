@@ -40,7 +40,8 @@ def generate_product_page(product: Product, output_dir: Path) -> Path:
     />
     <link rel="stylesheet" href="./styles.css" />
     <script>
-      window.__API_BASE_URL__ = window.__API_BASE_URL__ || "http://localhost:8080";
+      // Comunicação totalmente via bot - sem API
+      const TELEGRAM_BOT_USERNAME = "{escape_html(settings.telegram_bot_username)}";
     </script>
   </head>
   <body class="product-page">
@@ -538,7 +539,7 @@ def generate_media_html(product: Product) -> str:
 def generate_benefits_html(product: Product) -> str:
     """Gera HTML para benefícios"""
     if product.benefits and len(product.benefits) > 0:
-        benefits_list = "".join([f"<li>{benefit}</li>" for benefit in product.benefits])
+        benefits_list = "".join([f"<li>{escape_html(benefit)}</li>" for benefit in product.benefits])
         return f"""
           <div>
             <h3>Benefícios incluídos:</h3>

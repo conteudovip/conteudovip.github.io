@@ -372,12 +372,35 @@ async def cmd_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_pix(update: Update, context: ContextTypes.DEFAULT_TYPE):
-  if len(context.args) < 1:
-    return await update.message.reply_text("Use /pix <produto_id>")
-  product_id = context.args[0]
+  """Gera PIX para um produto. Pode ser chamado via /pix <id> ou /start pix-<id>"""
+  product_id = None
+  
+  # Verifica se foi chamado via /start pix-<id>
+  if update.message and update.message.text:
+    text = update.message.text.strip()
+    if text.startswith("/start pix-"):
+      product_id = text.replace("/start pix-", "").strip()
+    elif len(context.args) >= 1:
+      product_id = context.args[0]
+  elif len(context.args) >= 1:
+    product_id = context.args[0]
+  
+  if not product_id:
+    return await update.message.reply_text(
+      "💳 *Gerar PIX*\n\n"
+      "Use: `/pix <produto_id>`\n"
+      "Exemplo: `/pix vip-pro`\n\n"
+      "Ou acesse o produto no site e clique em 'Gerar PIX'",
+      parse_mode="Markdown"
+    )
+  
   product = store.get_product(product_id)
   if not product:
-    return await update.message.reply_text("Produto não encontrado.")
+    return await update.message.reply_text(
+      f"❌ Produto `{product_id}` não encontrado.\n\n"
+      "Use `/produtos` para ver a lista de produtos disponíveis.",
+      parse_mode="Markdown"
+    )
 
   customer_id = update.effective_user.id if update.effective_user else 0
   payment_id = f"{product.product_id}-{uuid4().hex[:8]}"
@@ -488,6 +511,20 @@ def main():
   time.sleep(2)
 
   application = Application.builder().token(settings.telegram_token).build()
+  
+  # Obtém username do bot automaticamente
+  async def get_bot_username():
+    try:
+      bot_info = await application.bot.get_me()
+      if bot_info.username:
+        settings.telegram_bot_username = bot_info.username
+        log.info(f"Bot username detectado: @{bot_info.username}")
+    except Exception as e:
+      log.warning(f"Não foi possível obter username do bot: {e}")
+  
+  # Executa após inicializar
+  import asyncio
+  asyncio.create_task(get_bot_username())
   
   # Handler conversacional para adicionar produto
   add_product_handler = ConversationHandler(

@@ -13,7 +13,8 @@
     />
     <link rel="stylesheet" href="./styles.css" />
     <script>
-      window.__API_BASE_URL__ = window.__API_BASE_URL__ || "http://localhost:8080";
+      // Comunicação totalmente via bot - sem API
+      const TELEGRAM_BOT_USERNAME = "";
     </script>
   </head>
   <body class="product-page">
@@ -35,7 +36,7 @@
         <p class="product-hero__lead">dasdasd</p>
         <div class="product-hero__meta">
           <span>R$ 19,99</span>
-          <span>Acesso vitalício incluído</span>
+          <span>Acesso vitalÃ­cio incluÃ­do</span>
         </div>
       </section>
 
@@ -58,7 +59,7 @@
           <button class="primary-cta" id="btn-generate-pix" type="button">
             Gerar Código Pix
           </button>
-          <p class="product-pix__note">Liberação imediata</p>
+          <p class="product-pix__note">LiberaÃ§Ã£o imediata</p>
         </div>
 
         <div id="pix-loading" class="product-pix__loading" hidden>
@@ -105,7 +106,7 @@
     <script>
       const API_BASE_URL = window.__API_BASE_URL__ || "http://localhost:8080";
       const PRODUCT_ID = "dsasdad";
-      const PRODUCT_DATA = {"product_id": "dsasdad", "title": "dsasdad", "price": 19.99, "currency": "BRL", "description": "dasdasd", "secret_link": "sasasda", "lifetime_text": "Acesso vitalício incluído", "note": "Liberação imediata"};
+      const PRODUCT_DATA = {"product_id": "dsasdad", "title": "dsasdad", "price": 19.99, "currency": "BRL", "description": "dasdasd", "secret_link": "sasasda", "lifetime_text": "Acesso vitalÃ­cio incluÃ­do", "note": "LiberaÃ§Ã£o imediata"};
 
       const state = {
         product: PRODUCT_DATA,
